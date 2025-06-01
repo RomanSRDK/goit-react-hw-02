@@ -1,4 +1,9 @@
-function Options({ feedbackButtons, updateFeedback }) {
+function Options({
+  feedbackButtons,
+  updateFeedback,
+  resetFeedback,
+  totalFeedback,
+}) {
   return (
     <>
       {feedbackButtons.map((feedback, index) => (
@@ -9,6 +14,10 @@ function Options({ feedbackButtons, updateFeedback }) {
             .join("")}
         </button>
       ))}
+
+      {totalFeedback > 0 && (
+        <button onClick={() => resetFeedback()}>Reset</button>
+      )}
     </>
   );
 }

@@ -12,16 +12,22 @@ function App() {
     bad: 0,
   });
 
-  const totalFeedback =
-    defaultFeedbacks["good"] +
-    defaultFeedbacks["neutral"] +
-    defaultFeedbacks["bad"];
+  const totalFeedback = Object.values(defaultFeedbacks).reduce(
+    (acc, number) => acc + number,
+    0
+  );
 
   const updateFeedback = (feedbackType) => {
-    setDefaultFeedbacks({
-      ...defaultFeedbacks,
-      [feedbackType]: defaultFeedbacks[feedbackType] + 1,
-    });
+    setDefaultFeedbacks((prevFeedbacks) => ({
+      ...prevFeedbacks,
+      [feedbackType]: prevFeedbacks[feedbackType] + 1,
+    }));
+  };
+
+  const resetFeedback = () => {
+    setDefaultFeedbacks(
+      Object.fromEntries(Object.keys(defaultFeedbacks).map((key) => [key, 0]))
+    );
   };
 
   return (
@@ -30,11 +36,13 @@ function App() {
       <Options
         feedbackButtons={Object.keys(defaultFeedbacks)}
         updateFeedback={updateFeedback}
+        resetFeedback={resetFeedback}
+        totalFeedback={totalFeedback}
       />
-      {totalFeedback === 0 ? (
-        <Notification text={"No feedback yet"} />
-      ) : (
+      {totalFeedback ? (
         <Feedback feedbacks={Object.entries(defaultFeedbacks)} />
+      ) : (
+        <Notification text={"No feedback yet"} />
       )}
     </>
   );
