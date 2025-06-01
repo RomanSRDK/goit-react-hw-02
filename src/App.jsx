@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Description from "./components/Description/Description";
 import Options from "./components/Options/Options";
+import Notification from "./components/Notification/Notification";
 import Feedback from "./components/Feedback/Feedback";
 import "./App.css";
 
@@ -10,6 +11,11 @@ function App() {
     neutral: 0,
     bad: 0,
   });
+
+  const totalFeedback =
+    defaultFeedbacks["good"] +
+    defaultFeedbacks["neutral"] +
+    defaultFeedbacks["bad"];
 
   const updateFeedback = (feedbackType) => {
     setDefaultFeedbacks({
@@ -25,7 +31,11 @@ function App() {
         feedbackButtons={Object.keys(defaultFeedbacks)}
         updateFeedback={updateFeedback}
       />
-      <Feedback feedbacks={Object.entries(defaultFeedbacks)} />
+      {totalFeedback === 0 ? (
+        <Notification text={"No feedback yet"} />
+      ) : (
+        <Feedback feedbacks={Object.entries(defaultFeedbacks)} />
+      )}
     </>
   );
 }
