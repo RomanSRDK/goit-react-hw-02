@@ -5,7 +5,7 @@ function Options({
   totalFeedback,
 }) {
   return (
-    <>
+    <div style={{ display: "flex", gap: "5px" }}>
       {feedbackButtons.map((feedback, index) => (
         <button key={index} onClick={() => updateFeedback(feedback)}>
           {feedback
@@ -18,7 +18,7 @@ function Options({
       {totalFeedback > 0 && (
         <button onClick={() => resetFeedback()}>Reset</button>
       )}
-    </>
+    </div>
   );
 }
 
