@@ -11,10 +11,20 @@ function App() {
     bad: 0,
   });
 
+  const updateFeedback = (feedbackType) => {
+    setDefaultFeedbacks({
+      ...defaultFeedbacks,
+      [feedbackType]: defaultFeedbacks[feedbackType] + 1,
+    });
+  };
+
   return (
     <>
       <Description />
-      <Options feedbackButtons={Object.keys(defaultFeedbacks)} />
+      <Options
+        feedbackButtons={Object.keys(defaultFeedbacks)}
+        updateFeedback={updateFeedback}
+      />
       <Feedback feedbacks={Object.entries(defaultFeedbacks)} />
     </>
   );
