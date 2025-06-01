@@ -1,4 +1,4 @@
-function Feedback({ feedbacks }) {
+function Feedback({ feedbacks, total, positive }) {
   return (
     <>
       {feedbacks.map((feedback, index) => (
@@ -7,6 +7,8 @@ function Feedback({ feedbacks }) {
           .map((char, index) => (index === 0 ? char.toUpperCase() : char))
           .join("")}: ${feedback[1]}`}</p>
       ))}
+      <p>Total: {total}</p>
+      <p>Positive: {positive}</p>
     </>
   );
 }

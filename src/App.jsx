@@ -17,6 +17,10 @@ function App() {
     0
   );
 
+  const positiveFeedback = Math.round(
+    (defaultFeedbacks.good / totalFeedback) * 100
+  );
+
   const updateFeedback = (feedbackType) => {
     setDefaultFeedbacks((prevFeedbacks) => ({
       ...prevFeedbacks,
@@ -40,7 +44,11 @@ function App() {
         totalFeedback={totalFeedback}
       />
       {totalFeedback ? (
-        <Feedback feedbacks={Object.entries(defaultFeedbacks)} />
+        <Feedback
+          feedbacks={Object.entries(defaultFeedbacks)}
+          total={totalFeedback}
+          positive={positiveFeedback}
+        />
       ) : (
         <Notification text={"No feedback yet"} />
       )}
